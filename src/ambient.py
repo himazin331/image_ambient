@@ -42,15 +42,18 @@ if pad_width < 0 or pad_height < 0:
     pad_height = int((args.disp_height - height) / 2)
 
 # * Create a transparent gradient
-alpha_channels = np.zeros((height, width), dtype=np.uint16)
-a_height, a_width = alpha_channels.shape
-for y in range(a_height):
-    for x in range(a_width):
-        alpha_channels[y, x] = int(255 * min(min(x, y), min(a_width - x, a_height - y)) / args.alpha_dist)
-alpha_channels = np.clip(alpha_channels, 0.0, 255.0)
-# add alpha channel
-add_alpha_img = cv2.cvtColor(org_img, cv2.COLOR_BGR2BGRA)
-add_alpha_img[:, :, 3] = alpha_channels
+if args.alpha_dist > 1:
+    alpha_channels = np.zeros((height, width), dtype=np.uint16)
+    a_height, a_width = alpha_channels.shape
+    for y in range(a_height):
+        for x in range(a_width):
+            alpha_channels[y, x] = int(255 * min(min(x, y), min(a_width - x, a_height - y)) / args.alpha_dist)
+    alpha_channels = np.clip(alpha_channels, 0.0, 255.0)
+    # add alpha channel
+    add_alpha_img = cv2.cvtColor(org_img, cv2.COLOR_BGR2BGRA)
+    add_alpha_img[:, :, 3] = alpha_channels
+else:
+    add_alpha_img = cv2.cvtColor(org_img, cv2.COLOR_BGR2BGRA)
 
 # * Padding a blur effect background
 # add padding to image

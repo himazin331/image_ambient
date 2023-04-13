@@ -7,7 +7,7 @@ parser.add_argument("--img_path", "-i", type=str, default=None, help="Input imag
 parser.add_argument("--output_path", "-o", type=str, default="output.png", help="Output image path")
 parser.add_argument("--disp_width", "-dw", type=int, default=1920, help="Display width (default: 1920)")
 parser.add_argument("--disp_height", "-dh", type=int, default=1080, help="Display height (default: 1080)")
-parser.add_argument("--gauss_sigma", "-gs", type=int, default=200, help="Gaussian blur sigma (default: 200)")
+parser.add_argument("--gauss_sigma", "-gs", type=float, default=200.0, help="Gaussian blur sigma (default: 200)")
 parser.add_argument("--alpha_dist", "-ad", type=float, default=50.0, help="Distance of transparent gradient of image border (default: 50.0)")
 args = parser.parse_args()
 

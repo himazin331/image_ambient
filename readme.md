@@ -4,9 +4,11 @@
 デスクトップ背景とかにおすすめです。(多分)
 
 アンビエント(ambient)とは、環境という意味があり画像の雰囲気(というより色合い)に沿って画像を拡張するツールです。
+
 詳細は[出力](#出力)へ。
 
 ※アンビエント自体には、YouTubeから着想を得ました
+
 参考 - [YouTubeに新デザイン。没入感高める「アンビエントモード」など](https://av.watch.impress.co.jp/docs/news/1450257.html)
 
 ## 使用方法
@@ -35,12 +37,15 @@ python src/ambient.py -i <IMAGE_PATH> -o <OUTPUT_PATH>
 #### ガウシアンフィルタの標準偏差
 
 背景画像(アンビエント)の拡散度合いです。
+
 値が大きいほど拡散度合いが強くなります。
 
 #### 透過グラデーションの距離
 
 元画像の縁に適用する透過グラデーションの距離(幅)です。
+
 値が大きいほど距離が長くなります。
+
 また、`0`を指定すると透過グラデーションは適用されません。
 
 ### 出力
@@ -50,34 +55,36 @@ python src/ambient.py -i <IMAGE_PATH> -o <OUTPUT_PATH>
 ```
 python src/ambient.py -i sample1.png -o output1.png -dw 1920 -dh 1080 -gs 200.0 -ad 50.0
 ```
-![output1](sample/output1.png)
+<img src="sample/output1.png" width="70%">
 
 ガウシアンフィルタの標準偏差の変更
 ```
 python src/ambient.py -i sample1.png -o output2.png -dw 1920 -dh 1080 -gs 80.0 -ad 50.0
 ```
-![output2](sample/output2.png)
+<img src="sample/output2.png" width="70%">
 
 透過グラデーションの距離の変更
 ```
 python src/ambient.py -i sample1.png -o sample/output5.png -dw 1920 -dh 1080 -gs 200.0 -ad 20.0
 ```
-![output3](sample/output3.png)
+<img src="sample/output3.png" width="70%">
 
 ```
 python src/ambient.py -i sample1.png -o output3.png -dw 1920 -dh 1080 -gs 200.0 -ad 0.0
 ```
-![output4](sample/output4.png)
+<img src="sample/output4.png" width="70%">
 
 サイズの変更
 ```
 python src/ambient.py -i sample1.png -o sample/output4.png -dw 900 -dh 900 -gs 200.0 -ad 50.0
 ```
-![output5](sample/output5.png)
+<img src="sample/output5.png" width="70%">
 
 出力された画像をデスクトップに適用するとこんな感じ。
+
 (嗜好がバレる....w)
-![desktop](image/desktop.png)
+
+<img src="image/desktop.png" width="70%">
 
 ## 経緯
 

@@ -9,6 +9,7 @@ parser.add_argument("--disp_width", "-dw", type=int, default=1920, help="Display
 parser.add_argument("--disp_height", "-dh", type=int, default=1080, help="Display height (default: 1080)")
 parser.add_argument("--gauss_sigma", "-gs", type=float, default=200.0, help="Gaussian blur sigma (default: 200)")
 parser.add_argument("--alpha_dist", "-ad", type=float, default=50.0, help="Distance of transparent gradient of image border (default: 50.0)")
+parser.add_argument("--pad_mod", "-pm", type=str, choices=["reflect", "constant"], default="reflect", help="Padding mode (default: reflect)")
 args = parser.parse_args()
 
 print(f"DISPLAY SIZE: {args.disp_width} x {args.disp_height}")
@@ -57,7 +58,11 @@ else:
 
 # * Padding a blur effect background
 # add padding to image
-padding_img = cv2.copyMakeBorder(org_img, pad_height, pad_height, pad_width, pad_width, cv2.BORDER_REFLECT)
+if args.pad_mod == "reflect":
+    border_type: int = cv2.BORDER_REFLECT
+else:
+    border_type = cv2.BORDER_CONSTANT
+padding_img = cv2.copyMakeBorder(org_img, pad_height, pad_height, pad_width, pad_width, border_type, value=(255, 255, 255))
 padding_img = cv2.resize(padding_img, (args.disp_width, args.disp_height))  # Completely fill in just a few shortfalls.
 bler_img = cv2.GaussianBlur(padding_img, (0, 0), args.gauss_sigma)  # ! too slow
 # overwrite image
